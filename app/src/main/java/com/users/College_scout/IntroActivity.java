@@ -19,14 +19,21 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+        String msg="";
         switch (v.getId()) {
             case R.id.btnsignup:
-                startActivity(new Intent(this, SignupActivity.class));
+                msg="signup";
+               // startActivity(new Intent(this, SignupActivity.class));
                 break;
 
             case R.id.button2:
-                startActivity(new Intent(this, LoginActivity.class));
+                msg="login";
+                //startActivity(new Intent(this, LoginActivity.class));
                 break;
         }
+        Intent baseintent = new Intent(this, AuthActivity.class);
+        baseintent.putExtra("authkeyword", msg);
+        startActivity(baseintent);
+        finish();
     }
 }
