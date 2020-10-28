@@ -20,6 +20,6 @@ public class AuthActivity extends AppCompatActivity {
         else
             fragment= new SignupFragment();
         FragmentManager fragmentManager= getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.container,fragment).addToBackStack(null).commit();
+        fragmentManager.beginTransaction().replace(R.id.container,fragment).commit();
     }
 }

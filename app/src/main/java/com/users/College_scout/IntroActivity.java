@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+
 public class IntroActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
@@ -15,6 +18,11 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
 
         findViewById(R.id.btnsignup).setOnClickListener(this);
         findViewById(R.id.button2).setOnClickListener(this);
+
+        YoYo.with(Techniques.Bounce)
+                .duration(2000)
+                .repeat(YoYo.INFINITE)
+                .playOn(findViewById(R.id.imageView2));
     }
 
     @Override
@@ -34,6 +42,6 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
         Intent baseintent = new Intent(this, AuthActivity.class);
         baseintent.putExtra("authkeyword", msg);
         startActivity(baseintent);
-        finish();
+       // finish();
     }
 }
