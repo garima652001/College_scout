@@ -67,6 +67,7 @@
             android:layout_marginTop="4dp"
             android:background="@drawable/etbg"
             android:ems="10"
+            android:maxLength="10"
             android:fontFamily="@font/gilroy_medium"
             android:hint="Enter mobile number"
             android:inputType="number"

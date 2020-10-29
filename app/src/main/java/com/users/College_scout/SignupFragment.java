@@ -1,5 +1,6 @@
 package com.users.College_scout;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.text.method.PasswordTransformationMethod;
 import android.text.method.SingleLineTransformationMethod;
+import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,14 +17,27 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.users.College_scout.Interface.Retroclient;
 import com.users.College_scout.R;
+import com.users.College_scout.Request.Signup;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SignupFragment extends Fragment {
 
     TextView login;
-    EditText etpassword, etconfirmpassword;
+    EditText etpassword, etconfirmpassword,et_email,et_number;
     View view;
     Button btn;
 
@@ -38,6 +54,8 @@ public class SignupFragment extends Fragment {
         etpassword= view.findViewById(R.id.etpassword);
         etconfirmpassword= view.findViewById(R.id.etconfirmpassword);
         btn= view.findViewById(R.id.btn_nxt1);
+        et_email = view.findViewById(R.id.etemail);
+        et_number = view.findViewById(R.id.etphoneno);
 
         etpassword.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -95,12 +113,79 @@ public class SignupFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment= new OtpFragment();
-                FragmentTransaction fragmentTransaction= getActivity().getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.container, fragment).commit();
+                signup();
             }
         });
 
         return view;
+    }
+
+    private void signup() {
+        String email = et_email.getText().toString();
+        String phoneno = et_number.getText().toString();
+        String password = etpassword.getText().toString();
+        String cpassword = etconfirmpassword.getText().toString();
+
+        if(email.isEmpty()){
+            et_email.setError("Email is required");
+            et_email.requestFocus();
+            return;
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            et_email.setError("Enter a valid email");
+            et_email.requestFocus();
+            return;
+        }
+        if (password.isEmpty()) {
+            etpassword.setError("Password is required");
+            etpassword.requestFocus();
+            return;
+        }
+        if (password.length() < 8) {
+            etpassword.setError("Password must be atleast 8 characters long");
+            etpassword.requestFocus();
+            return;
+        }
+        if (!cpassword.equals(password)) {
+            etconfirmpassword.setError("Passwords do not match");
+            etconfirmpassword.requestFocus();
+            return;
+        }
+        if (phoneno.isEmpty()) {
+            et_number.setError("Phone number is required");
+            et_number.requestFocus();
+            return;
+        }
+        if (phoneno.length() <10) {
+            et_number.setError("Enter a valid number");
+            et_number.requestFocus();
+            return;
+        }
+        Signup signin = new Signup(email, password, phoneno);
+        Call<ResponseBody> call = Retroclient
+                .getInstance()
+                .getapi()
+                .createuser(signin);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                    if (response.isSuccessful()) {
+                        Toast.makeText(getActivity(),"OTP sent to your email", Toast.LENGTH_LONG).show();
+                        Fragment fragment= new OtpFragment();
+                        FragmentTransaction fragmentTransaction= getActivity().getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.container, fragment).commit();
+
+                    } else {
+                        Toast.makeText(getActivity(),"Email already exists", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 }
