@@ -64,12 +64,11 @@
         android:layout_marginHorizontal="68dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/bg3"
-        android:ems="10"
         android:fontFamily="@font/gilroy_medium"
         android:hint="Enter otp"
         android:inputType="number"
         android:padding="12dp"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 

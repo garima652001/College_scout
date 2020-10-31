@@ -1,15 +1,12 @@
 package com.users.College_scout.Request;
 
-public class Signup {
+public class LoginRequest {
     String email,password;
-    String number;
 
-    public Signup(String email, String password, String number) {
+    public LoginRequest(String email, String password) {
         this.email = email;
         this.password = password;
-        this.number = number;
     }
-
 
     public String getEmail() {
         return email;
@@ -26,14 +23,4 @@ public class Signup {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
 }
-
-

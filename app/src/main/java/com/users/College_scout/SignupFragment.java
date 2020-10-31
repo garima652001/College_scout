@@ -1,5 +1,6 @@
 package com.users.College_scout;
 
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -19,6 +20,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.pixplicity.easyprefs.library.Prefs;
 import com.users.College_scout.Interface.Retroclient;
 import com.users.College_scout.R;
 import com.users.College_scout.Request.Signup;
@@ -29,6 +31,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import es.dmoral.toasty.Toasty;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,7 +40,7 @@ import retrofit2.Response;
 public class SignupFragment extends Fragment {
 
     TextView login;
-    EditText etpassword, etconfirmpassword,et_email,et_number;
+    EditText etpassword, etconfirmpassword, et_email, et_number;
     View view;
     Button btn;
 
@@ -51,23 +54,29 @@ public class SignupFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_signup, container, false);
-        etpassword= view.findViewById(R.id.etpassword);
-        etconfirmpassword= view.findViewById(R.id.etconfirmpassword);
-        btn= view.findViewById(R.id.btn_nxt1);
+        etpassword = view.findViewById(R.id.etpassword);
+        etconfirmpassword = view.findViewById(R.id.etconfirmpassword);
+        btn = view.findViewById(R.id.btn_nxt1);
         et_email = view.findViewById(R.id.etemail);
-        et_number = view.findViewById(R.id.etphoneno);
+        et_number=view.findViewById(R.id.etphoneno);
+        // Initialize the Prefs class
+        new Prefs.Builder()
+                .setContext(getContext())
+                .setMode(ContextWrapper.MODE_PRIVATE)
+                .setPrefsName("Collegescout")
+                .setUseDefaultSharedPreference(true)
+                .build();
 
         etpassword.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 final int DRAWABLE_RIGHT = 2;
 
-                if(event.getAction() == MotionEvent.ACTION_UP) {
-                    if(event.getRawX() >= (etpassword.getRight() - etpassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                        if (etpassword.getTransformationMethod().getClass().getSimpleName() .equals("PasswordTransformationMethod")) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= (etpassword.getRight() - etpassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        if (etpassword.getTransformationMethod().getClass().getSimpleName().equals("PasswordTransformationMethod")) {
                             etpassword.setTransformationMethod(new SingleLineTransformationMethod());
-                        }
-                        else {
+                        } else {
                             etpassword.setTransformationMethod(new PasswordTransformationMethod());
                         }
 
@@ -83,12 +92,11 @@ public class SignupFragment extends Fragment {
             public boolean onTouch(View v, MotionEvent event) {
                 final int DRAWABLE_RIGHT = 2;
 
-                if(event.getAction() == MotionEvent.ACTION_UP) {
-                    if(event.getRawX() >= (etconfirmpassword.getRight() - etconfirmpassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                        if (etconfirmpassword.getTransformationMethod().getClass().getSimpleName() .equals("PasswordTransformationMethod")) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= (etconfirmpassword.getRight() - etconfirmpassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        if (etconfirmpassword.getTransformationMethod().getClass().getSimpleName().equals("PasswordTransformationMethod")) {
                             etconfirmpassword.setTransformationMethod(new SingleLineTransformationMethod());
-                        }
-                        else {
+                        } else {
                             etconfirmpassword.setTransformationMethod(new PasswordTransformationMethod());
                         }
 
@@ -100,12 +108,12 @@ public class SignupFragment extends Fragment {
             }
         });
 
-        login= view.findViewById(R.id.tv_login);
+        login = view.findViewById(R.id.tv_login);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Fragment fragment = new LoginFragment();
-                FragmentTransaction fragmentTransaction= getActivity().getSupportFragmentManager().beginTransaction();
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.container, fragment).commit();
             }
         });
@@ -121,12 +129,12 @@ public class SignupFragment extends Fragment {
     }
 
     private void signup() {
-        String email = et_email.getText().toString();
-        String phoneno = et_number.getText().toString();
+        final String email = et_email.getText().toString();
+        String number = et_number.getText().toString();
         String password = etpassword.getText().toString();
         String cpassword = etconfirmpassword.getText().toString();
 
-        if(email.isEmpty()){
+        if (email.isEmpty()) {
             et_email.setError("Email is required");
             et_email.requestFocus();
             return;
@@ -151,41 +159,46 @@ public class SignupFragment extends Fragment {
             etconfirmpassword.requestFocus();
             return;
         }
-        if (phoneno.isEmpty()) {
+        if (number.isEmpty()) {
             et_number.setError("Phone number is required");
             et_number.requestFocus();
             return;
         }
-        if (phoneno.length() <10) {
+        if (number.length() < 10) {
             et_number.setError("Enter a valid number");
             et_number.requestFocus();
             return;
-        }
-        Signup signin = new Signup(email, password, phoneno);
-        Call<ResponseBody> call = Retroclient
-                .getInstance()
-                .getapi()
-                .createuser(signin);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+        } else {
+            Signup signin = new Signup(email, password, number);
+            Call<ResponseBody> call = Retroclient
+                    .getInstance()
+                    .getapi()
+                    .createuser(signin);
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
                     if (response.isSuccessful()) {
-                        Toast.makeText(getActivity(),"OTP sent to your email", Toast.LENGTH_LONG).show();
-                        Fragment fragment= new OtpFragment();
-                        FragmentTransaction fragmentTransaction= getActivity().getSupportFragmentManager().beginTransaction();
+                        Toasty.success(getContext(), "OTP sent to your email", Toast.LENGTH_LONG, true).show();
+                        //Toast.makeText(getActivity(), "OTP sent to your email", Toast.LENGTH_LONG).show();
+                        Prefs.putString("email", email);
+                        Fragment fragment = new OtpFragment();
+                        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.container, fragment).commit();
 
                     } else {
-                        Toast.makeText(getActivity(),"Email already exists", Toast.LENGTH_LONG).show();
+                        Toasty.error(getContext(), "Email already exists", Toast.LENGTH_LONG, true).show();
+                        //Toast.makeText(getActivity(), "Email already exists", Toast.LENGTH_LONG).show();
                     }
                 }
 
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Toasty.error(getContext(), t.getMessage(), Toast.LENGTH_LONG, true).show();
+                    //Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
 
+        }
     }
 }

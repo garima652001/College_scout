@@ -52,14 +52,14 @@
             android:layout_marginHorizontal="35dp"
             android:layout_marginTop="45dp"
             android:fontFamily="@font/gilroy_medium"
-            android:text="Mobile Number"
+            android:text="Email id"
             android:textStyle="bold"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view" />
 
         <EditText
-            android:id="@+id/etmobileno"
+            android:id="@+id/et_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
@@ -67,8 +67,8 @@
             android:background="@drawable/etbg"
             android:ems="10"
             android:fontFamily="@font/gilroy_medium"
-            android:hint="Enter mobile number"
-            android:inputType="number"
+            android:hint="Enter your email"
+            android:inputType="textPersonName"
             android:padding="15dp"
             android:textSize="17sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -85,7 +85,7 @@
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etmobileno" />
+            app:layout_constraintTop_toBottomOf="@+id/et_email" />
 
         <EditText
             android:id="@+id/etpassword"
