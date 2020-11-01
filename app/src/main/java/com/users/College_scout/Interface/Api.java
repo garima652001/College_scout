@@ -1,9 +1,11 @@
 package com.users.College_scout.Interface;
 
 import com.users.College_scout.Request.LoginRequest;
+import com.users.College_scout.Request.OtpcheckRequest;
 import com.users.College_scout.Request.Otpverify;
 import com.users.College_scout.Request.Resendotp;
 import com.users.College_scout.Request.ResetRequest;
+import com.users.College_scout.Request.ResetpassRequest;
 import com.users.College_scout.Request.Signup;
 import com.users.College_scout.Respose.LoginResponse;
 import com.users.College_scout.Respose.OtpResponse;
@@ -32,5 +34,10 @@ public interface Api {
     @POST("signup/resetOtp")
     Call<ResponseBody> resetotpemail(@Body ResetRequest reset);
 
+    @POST("check-Reset-Otp")
+    Call<ResponseBody> resetotpcheck(@Body Otpverify reset);
+
+    @POST("reset-Password")
+    Call<ResponseBody> resetpassword(@Body ResetpassRequest reset);
 
 }

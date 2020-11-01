@@ -1,5 +1,6 @@
 package com.users.College_scout;
 
+import android.content.ContextWrapper;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.pixplicity.easyprefs.library.Prefs;
 import com.users.College_scout.Interface.Retroclient;
 import com.users.College_scout.Request.ResetRequest;
 
@@ -35,6 +37,13 @@ public class ResetFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        new Prefs.Builder()
+                .setContext(getContext())
+                .setMode(ContextWrapper.MODE_PRIVATE)
+                .setPrefsName("Collegescout")
+                .setUseDefaultSharedPreference(true)
+                .build();
+
     }
 
     @Override
@@ -56,7 +65,7 @@ public class ResetFragment extends Fragment {
     }
 
     private void send() {
-        String email = et_email.getText().toString();
+        final String email = et_email.getText().toString();
         if (email.isEmpty()) {
             et_email.setError("Email is required");
             et_email.requestFocus();
@@ -81,6 +90,7 @@ public class ResetFragment extends Fragment {
                             JSONObject jsonObject = new JSONObject(res);
                             String msg= jsonObject.getString("message");
                             Toasty.success(getContext(), msg, Toast.LENGTH_LONG, true).show();
+                            Prefs.putString("reset_mail", email);
                             Fragment fragment= new ResetotpFragment();
                             FragmentTransaction fragmentTransaction= getActivity().getSupportFragmentManager().beginTransaction();
                             fragmentTransaction.replace(R.id.container, fragment).commit();
