@@ -35,4 +35,5 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.pixplicity.easyprefs:library:1.9.0'
     implementation 'com.github.GrenderG:Toasty:1.5.0'
+    implementation 'com.github.mukeshsolanki:android-otpview-pinview:2.1.2'
 }

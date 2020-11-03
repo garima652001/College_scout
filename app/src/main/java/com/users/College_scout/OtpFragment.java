@@ -1,6 +1,7 @@
 package com.users.College_scout;
 
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,6 +16,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mukesh.OnOtpCompletionListener;
+import com.mukesh.OtpView;
 import com.pixplicity.easyprefs.library.Prefs;
 import com.users.College_scout.Interface.Retroclient;
 import com.users.College_scout.Request.Otpverify;
@@ -37,6 +40,7 @@ public class OtpFragment extends Fragment {
     Button btn_verify;
     EditText etotp;
     TextView resend;
+    private OtpView otpView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,14 @@ public class OtpFragment extends Fragment {
         btn_verify= view.findViewById(R.id.btn_verify);
         etotp= view.findViewById(R.id.et_otp);
         resend=view.findViewById(R.id.tv_resend);
+        otpView = view.findViewById(R.id.otp_view);
+
+        otpView.setOtpCompletionListener(new OnOtpCompletionListener() {
+            @Override public void onOtpCompleted(String otp) {
+                // do Stuff
+                btn_verify.setClickable(true);
+            }
+        });
 
         btn_verify.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,7 +121,7 @@ public class OtpFragment extends Fragment {
     }
 
     private void verify() {
-        String otp = etotp.getText().toString();
+        String otp = otpView.getText().toString();
         String email = Prefs.getString("email","");
         Otpverify verify= new Otpverify(email,otp);
         Call<OtpResponse> call= Retroclient
@@ -125,6 +137,7 @@ public class OtpFragment extends Fragment {
                 try {
                     if (response.code()==200)
                     {
+                        Prefs.putBoolean("registered",true);
                         OtpResponse res = response.body();
                         String msg= res.getMessage();
                         String accesstoken = res.getSignAccessToken();
@@ -141,9 +154,7 @@ public class OtpFragment extends Fragment {
                         Prefs.putString("refresh_token", refreshtoken);*/
 
                         Toasty.success(getContext(), msg, Toast.LENGTH_LONG, true).show();
-                        Fragment fragment= new DetailFragment();
-                        FragmentTransaction fragmentTransaction= getActivity().getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.container, fragment).commit();
+                        startActivity(new Intent(getActivity(),DetailActivity.class));
                     }
                     else
                     {

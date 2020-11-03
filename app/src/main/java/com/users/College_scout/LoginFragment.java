@@ -113,6 +113,7 @@ public class LoginFragment extends Fragment {
             call.enqueue(new Callback<LoginResponse>() {
                 @Override
                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                    //Toasty.success(getContext(),"on response", Toast.LENGTH_LONG, true).show();
                     if(!response.isSuccessful()){
                         String error= null;
                         try {
@@ -126,10 +127,12 @@ public class LoginFragment extends Fragment {
                         }
                     }
                     else {
-                       LoginResponse res = response.body();
+                        //Toasty.success(getContext(),"success", Toast.LENGTH_LONG, true).show();
+                        LoginResponse res = response.body();
                         String msg= res.getMessage();
                         String accesstoken = res.getSignAccessToken();
                         String refreshtoken = res.getRefreshToken();
+                        Prefs.putBoolean("registered",true);
                         Prefs.putString("access_token", accesstoken);
                         Prefs.putString("refresh_token", refreshtoken);
                         Toasty.success(getContext(), msg, Toast.LENGTH_LONG, true).show();

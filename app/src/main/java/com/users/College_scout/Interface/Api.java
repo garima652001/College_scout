@@ -1,5 +1,6 @@
 package com.users.College_scout.Interface;
 
+import com.users.College_scout.Request.DetailRequest;
 import com.users.College_scout.Request.LoginRequest;
 import com.users.College_scout.Request.OtpcheckRequest;
 import com.users.College_scout.Request.Otpverify;
@@ -14,6 +15,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 
@@ -39,5 +41,8 @@ public interface Api {
 
     @POST("reset-Password")
     Call<ResponseBody> resetpassword(@Body ResetpassRequest reset);
+
+    @POST("shopInfo")
+    Call<ResponseBody> savedetail(@Body DetailRequest detail ,@Header("Authorization") String header);
 
 }
