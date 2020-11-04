@@ -75,9 +75,11 @@ public class DetailActivity extends AppCompatActivity {
             et_college.requestFocus();
             return;
         }
-        if (!selected) {
+        if (radioGroup.getCheckedRadioButtonId()==-1) {
             Toasty.normal(DetailActivity.this, "Select shop location").show();
-        } else {
+        }
+
+        else {
             DetailRequest details = new DetailRequest(email, name, shop_name, college, incollege);
             Call<ResponseBody> call = Retroclient
                     .getInstance()
@@ -89,15 +91,19 @@ public class DetailActivity extends AppCompatActivity {
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.isSuccessful()) {
                         Toasty.success(DetailActivity.this, "Details successfully added", Toasty.LENGTH_LONG, true).show();
-                        startActivity(new Intent(DetailActivity.this, LocationActivity.class));
+                        startActivity(new Intent(DetailActivity.this, MainActivity.class));
                     }
                     else if (response.code() == 401) {
                         Toasty.normal(DetailActivity.this,"expired").show();
+                        String token1= Prefs.getString("refresh_token","");
+                         PrefsApplication prefsApplication= new PrefsApplication();
+                         prefsApplication.refreshToken(token1);
+                         add_details();
                     }
                     else {
                         try {
                             String msg = response.errorBody().string();
-                            Toasty.normal(DetailActivity.this, "error").show();
+                            Toasty.normal(DetailActivity.this, msg).show();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -114,10 +120,11 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     public void checkbtn(View view) {
-        int radioid=radioGroup.getCheckedRadioButtonId();
-        radioButton= findViewById(radioid);
-       // Toasty.error(DetailActivity.this,"id: "+radioid, Toast.LENGTH_LONG, true).show();
-      if(radioid==2131296431){
+        //Toasty.normal(DetailActivity.this,"id").show();
+        int radioid = radioGroup.getCheckedRadioButtonId();
+        radioButton = findViewById(radioid);
+       //Toasty.error(DetailActivity.this,"id: "+radioid, Toast.LENGTH_LONG, true).show();
+      if(radioid == 2131296431){
           incollege=true;
           selected=true;
       }
