@@ -1,8 +1,8 @@
 package com.users.College_scout.Interface;
 
+import com.google.gson.JsonObject;
 import com.users.College_scout.Request.DetailRequest;
 import com.users.College_scout.Request.LoginRequest;
-import com.users.College_scout.Request.OtpcheckRequest;
 import com.users.College_scout.Request.Otpverify;
 import com.users.College_scout.Request.Resendotp;
 import com.users.College_scout.Request.ResetRequest;
@@ -19,7 +19,6 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
 
 public interface Api {
 
@@ -53,4 +52,19 @@ public interface Api {
 
     @GET("getCategory")
     Call<ResponseBody> getcategory();
+
+    @POST("shop/addItem")
+    Call<ResponseBody> additem(@Body JsonObject add_item, @Header("Authorization") String header);
+
+   /* @Multipart
+    @POST("shop/addItem")
+    Call<ResponseBody> additem(
+            @Part("itemName") RequestBody itemname,
+            @Part("isveg") RequestBody isveg,
+            @Part("category") RequestBody category,
+            @Part("email") RequestBody email,
+            @Part("priceArray") RequestBody pricearray,
+            @Part MultipartBody.Part imgUrl
+    );*/
+
 }

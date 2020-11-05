@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "306468141580",
+    "firebase_url": "https://collegescout-6e254.firebaseio.com",
+    "project_id": "collegescout-6e254",
+    "storage_bucket": "collegescout-6e254.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306468141580:android:b6b5feafd242be97c8cc29",
+        "android_client_info": {
+          "package_name": "com.users.col_scout"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "306468141580-c566bhnf6v62n835raa9o7q89ee70fmi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.users.col_scout",
+            "certificate_hash": "092ebcae1c0fed1d134adf9ba227d874013ed01a"
+          }
+        },
+        {
+          "client_id": "306468141580-dhh55srgft2d4trqojlb3k45f38ntilk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPDfZwCrlvtjpaIlmJPRo_8YgErvwUMmI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "306468141580-dhh55srgft2d4trqojlb3k45f38ntilk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
