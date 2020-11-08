@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_add"
+        android:id="@+id/btn_addrate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -27,10 +27,12 @@
         android:fontFamily="@font/gilroy_bold"
         android:textAllCaps="false"
         android:textColor="#fff"
+        android:stateListAnimator="@null"
         android:textSize="18sp"
         android:background="@drawable/buttonbg"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/price" />
+        app:layout_constraintTop_toBottomOf="@+id/price"
+        android:layout_marginBottom="2dp"/>
     <Button
         android:id="@+id/btn_cancel"
         android:layout_width="wrap_content"
@@ -41,14 +43,16 @@
         android:fontFamily="@font/gilroy_bold"
         android:textAllCaps="false"
         android:textColor="#000"
+        android:stateListAnimator="@null"
         android:textSize="18sp"
         android:layout_marginLeft="16dp"
         android:background="@drawable/etbg"
+        android:layout_marginBottom="2dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/price" />
 
-    <EditText
-        android:id="@+id/editTextTextPersonName"
+    <TextView
+        android:id="@+id/tv_platesize"
         android:layout_width="match_parent"
         android:background="@drawable/etbg"
         android:padding="15dp"
@@ -60,6 +64,7 @@
         android:fontFamily="@font/gilroy_medium"
         android:inputType="textPersonName"
         android:hint="Plate size"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
@@ -73,9 +78,9 @@
         android:padding="15dp"
         android:ems="10"
         android:fontFamily="@font/gilroy_medium"
-        android:inputType="textPersonName"
+        android:inputType="number"
         android:hint="Price of this plate"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_platesize" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

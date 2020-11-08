@@ -3,15 +3,6 @@
     android:height="184dp"
     android:viewportWidth="328"
     android:viewportHeight="184">
-  <path
-      android:pathData="M8,0L320,0A8,8 0,0 1,328 8L328,176A8,8 0,0 1,320 184L8,184A8,8 0,0 1,0 176L0,8A8,8 0,0 1,8 0z"
-      android:fillColor="#FAFAFA"/>
-  <path
-      android:pathData="M8,1L320,1A7,7 0,0 1,327 8L327,176A7,7 0,0 1,320 183L8,183A7,7 0,0 1,1 176L1,8A7,7 0,0 1,8 1z"
-      android:strokeAlpha="0.2"
-      android:strokeWidth="2"
-      android:fillColor="#00000000"
-      android:strokeColor="#4F4F4F"/>
   <group>
     <clip-path
         android:pathData="M0.5,0.5h327v183h-327z"/>

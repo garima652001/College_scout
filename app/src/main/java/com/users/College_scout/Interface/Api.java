@@ -1,15 +1,20 @@
 package com.users.College_scout.Interface;
 
 import com.google.gson.JsonObject;
+import com.users.College_scout.FoodModel;
 import com.users.College_scout.Request.DetailRequest;
+import com.users.College_scout.Request.FoodRequest;
 import com.users.College_scout.Request.LoginRequest;
 import com.users.College_scout.Request.Otpverify;
+import com.users.College_scout.Request.RefreshRequest;
 import com.users.College_scout.Request.Resendotp;
 import com.users.College_scout.Request.ResetRequest;
 import com.users.College_scout.Request.ResetpassRequest;
 import com.users.College_scout.Request.Signup;
 import com.users.College_scout.Respose.LoginResponse;
 import com.users.College_scout.Respose.OtpResponse;
+
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -46,9 +51,12 @@ public interface Api {
     @POST("shopInfo")
     Call<ResponseBody> savedetail(@Body DetailRequest detail ,@Header("Authorization") String header);
 
-    @FormUrlEncoded
+    /*@FormUrlEncoded
     @POST("refreshToken")
-    Call<ResponseBody> refreshtoken(@Field("refreshToken") String token);
+    Call<ResponseBody> refreshtoken(@Field("refreshToken") String token);*/
+
+    @POST("refreshToken")
+    Call<ResponseBody> refreshtoken(@Body RefreshRequest refreshRequest);
 
     @GET("getCategory")
     Call<ResponseBody> getcategory();
@@ -56,15 +64,7 @@ public interface Api {
     @POST("shop/addItem")
     Call<ResponseBody> additem(@Body JsonObject add_item, @Header("Authorization") String header);
 
-   /* @Multipart
-    @POST("shop/addItem")
-    Call<ResponseBody> additem(
-            @Part("itemName") RequestBody itemname,
-            @Part("isveg") RequestBody isveg,
-            @Part("category") RequestBody category,
-            @Part("email") RequestBody email,
-            @Part("priceArray") RequestBody pricearray,
-            @Part MultipartBody.Part imgUrl
-    );*/
+    @POST("/shop/getItem")
+    Call<List<FoodModel>> getitems(@Body FoodRequest foodRequest);
 
 }

@@ -5,6 +5,7 @@ import android.content.ContextWrapper;
 
 import com.pixplicity.easyprefs.library.Prefs;
 import com.users.College_scout.Interface.Retroclient;
+import com.users.College_scout.Request.RefreshRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,10 +31,12 @@ public class PrefsApplication extends Application {
 
     public void refreshToken(String token){
         String retoken = Prefs.getString("refreshToken","");
+        RefreshRequest refreshRequest= new RefreshRequest(retoken);
+
         Call<ResponseBody> call= Retroclient
                 .getInstance()
                 .getapi()
-                .refreshtoken(retoken);
+                .refreshtoken(refreshRequest);
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override

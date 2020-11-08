@@ -94,7 +94,7 @@ public class DetailActivity extends AppCompatActivity {
                         startActivity(new Intent(DetailActivity.this, MainActivity.class));
                     }
                     else if (response.code() == 401) {
-                        Toasty.normal(DetailActivity.this,"expired").show();
+                        Toasty.normal(DetailActivity.this,"Expired").show();
                         String token1= Prefs.getString("refresh_token","");
                          PrefsApplication prefsApplication= new PrefsApplication();
                          prefsApplication.refreshToken(token1);

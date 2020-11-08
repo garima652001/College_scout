@@ -5,17 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginBottom="50dp">
+    tools:context="com.users.College_scout.AdditemActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="20dp">
 
         <RelativeLayout
             android:id="@+id/rel_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="18dp"
+            android:layout_margin="15dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -45,7 +46,7 @@
             android:layout_marginHorizontal="25dp"
             android:layout_marginTop="25dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_sample"
+            android:src="@drawable/ic_sample1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +59,7 @@
             android:background="@drawable/background"
             android:padding="15dp"
             android:text="+  Add photo"
-            android:textSize="15sp"
+            android:textSize="16sp"
             android:fontFamily="@font/gilroy_bold"
             android:textAllCaps="false"
             android:textColor="#FB8500"
@@ -212,7 +213,8 @@
             android:layout_marginTop="15dp"
             app:layout_constraintTop_toBottomOf="@+id/textView7"
             android:background="@drawable/etbg"
-            android:layout_marginHorizontal="30dp">
+            android:layout_marginHorizontal="30dp"
+            android:padding="10dp">
 
             <LinearLayout
                 android:id="@+id/linear_lay"
@@ -235,6 +237,17 @@
                     android:textColor="@color/black"
                     android:textSize="17sp"/>
                 <TextView
+                    android:id="@+id/tv_rs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="5dp"
+                    android:text="Rs."
+                    android:fontFamily="@font/gilroy_medium"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"/>
+
+                <TextView
                     android:id="@+id/tv_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -244,7 +257,6 @@
                     android:textColor="@color/black"
                     android:textSize="17sp"/>
             </LinearLayout>
-
 
             <ImageView
                 android:id="@+id/img_addrates"
@@ -256,8 +268,6 @@
                 android:layout_marginBottom="15dp"
                 android:layout_marginTop="8dp"
                 />
-
-
         </RelativeLayout>
 
         <Button
@@ -266,6 +276,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
+            android:stateListAnimator="@null"
             android:text="Done"
             android:paddingHorizontal="35dp"
             android:fontFamily="@font/gilroy_bold"
