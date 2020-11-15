@@ -82,7 +82,7 @@ public class LoginFragment extends Fragment {
     }
 
     private void loginuser() {
-        String email = etemail.getText().toString();
+        final String email = etemail.getText().toString();
         String password= et_password.getText().toString();
         if (email.isEmpty()) {
             etemail.setError("Email is required");
@@ -135,6 +135,7 @@ public class LoginFragment extends Fragment {
                         Prefs.putBoolean("registered",true);
                         Prefs.putString("access_token", accesstoken);
                         Prefs.putString("refresh_token", refreshtoken);
+                        Prefs.putString("email",email);
                         Toasty.success(getContext(), msg, Toast.LENGTH_LONG, true).show();
                         startActivity(new Intent(getActivity(),MainActivity.class));
                     }

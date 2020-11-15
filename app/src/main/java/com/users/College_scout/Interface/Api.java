@@ -2,6 +2,7 @@ package com.users.College_scout.Interface;
 
 import com.google.gson.JsonObject;
 import com.users.College_scout.FoodModel;
+import com.users.College_scout.OrdersModel;
 import com.users.College_scout.Request.DetailRequest;
 import com.users.College_scout.Request.FoodRequest;
 import com.users.College_scout.Request.LoginRequest;
@@ -66,5 +67,9 @@ public interface Api {
 
     @POST("/shop/getItem")
     Call<List<FoodModel>> getitems(@Body FoodRequest foodRequest);
+
+    @FormUrlEncoded
+    @POST("/shop/shopOrder")
+    Call<OrdersModel> getorderstatus(@Field("shopId") String shopId);
 
 }

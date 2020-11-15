@@ -138,10 +138,10 @@ public class AdditemActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 add_category();
-                spinnerDialog=new SpinnerDialog(AdditemActivity.this,category,"Select category","Close Button Text");// With No Animation
+                spinnerDialog=new SpinnerDialog(AdditemActivity.this,category,"Select category","");// With No Animation
                 //spinnerDialog=new SpinnerDialog(AdditemActivity.this,category,"Select category",R.style.DialogAnimations_SmileWindow,"Close Button Text");// With Animation
 
-                spinnerDialog.setCancellable(true);
+                spinnerDialog.setCancellable(false);
                 spinnerDialog.setShowKeyboard(false);// for open keyboard by default
                 // spinnerDialog.setItemColor(getResources().getColor(R.color.colorPrimary));
                 spinnerDialog.showSpinerDialog();
@@ -245,6 +245,11 @@ public class AdditemActivity extends AppCompatActivity {
         data.addProperty("price", price);
         data.addProperty("size", size);
         jsonObject.add("price",data);
+       /* JsonObject data1=new JsonObject();
+        data1.addProperty("price", price);
+        data1.addProperty("size", size);
+        jsonObject.add("price",data1);*/
+
         Call<ResponseBody> call= Retroclient
                 .getInstance()
                 .getapi()
@@ -335,10 +340,10 @@ public class AdditemActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 add_size();
-                spinnerDialog_size=new SpinnerDialog(AdditemActivity.this,platesize,"Select category","Close Button Text");// With No Animation
+                spinnerDialog_size=new SpinnerDialog(AdditemActivity.this,platesize,"Select category",null);// With No Animation
                 //spinnerDialog=new SpinnerDialog(AdditemActivity.this,category,"Select category",R.style.DialogAnimations_SmileWindow,"Close Button Text");// With Animation
 
-                spinnerDialog_size.setCancellable(true);
+                spinnerDialog_size.setCancellable(false);
                 spinnerDialog_size.setShowKeyboard(false);// for open keyboard by default
                 // spinnerDialog.setItemColor(getResources().getColor(R.color.colorPrimary));
                 spinnerDialog_size.showSpinerDialog();
@@ -346,7 +351,7 @@ public class AdditemActivity extends AppCompatActivity {
 
                     @Override
                     public void onClick(String item, int position) {
-                       // platesize.clear();
+                        platesize.clear();
                         selected_size = item;
                         boolean selected=true;
                         AdditemActivity.this.runOnUiThread(new Runnable() {

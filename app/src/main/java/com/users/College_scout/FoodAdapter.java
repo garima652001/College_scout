@@ -38,11 +38,12 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         String imgurl = list.get(position).getImgUrl();
         String title = list.get(position).getName();
+        String type= list.get(position).getIsveg();
         if (list.get(position).getPriceArray().size()!=0) {
             String size = list.get(position).getPriceArray().get(0).getSize();
             String price = list.get(position).getPriceArray().get(0).getPrice();
             holder.sizes.setText(size);
-            holder.price.setText(price);
+            holder.price.setText("Rs. "+price);
         }
         String category= list.get(position).getCategory();
         Picasso.get()
@@ -50,9 +51,14 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .into(holder.food_img);
         holder.food_name.setText(title);
-
         holder.category.setText(category);
 
+        if(type.equalsIgnoreCase("true")){
+            holder.veg_type.setImageResource(R.drawable.ic_veg);
+        }
+        else{
+            holder.veg_type.setImageResource(R.drawable.ic_nonveg);
+        }
         /*holder.rowlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

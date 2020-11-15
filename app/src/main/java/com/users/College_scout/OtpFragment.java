@@ -122,7 +122,7 @@ public class OtpFragment extends Fragment {
 
     private void verify() {
         String otp = otpView.getText().toString();
-        String email = Prefs.getString("email","");
+        final String email = Prefs.getString("email","");
         Otpverify verify= new Otpverify(email,otp);
         Call<OtpResponse> call= Retroclient
                 .getInstance()
@@ -144,6 +144,8 @@ public class OtpFragment extends Fragment {
                         String refreshtoken = res.getRefreshToken();
                         Prefs.putString("access_token", accesstoken);
                         Prefs.putString("refresh_token", refreshtoken);
+                        Prefs.putString("my_email",email);
+                        //Prefs.putString("email","this is email");
 
                        /* String str = response.body().string();
                         JSONObject jsonObject = new JSONObject(str);

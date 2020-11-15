@@ -1,45 +1,42 @@
 package com.users.College_scout.Repository;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 
 import com.pixplicity.easyprefs.library.Prefs;
 import com.users.College_scout.FoodModel;
 import com.users.College_scout.Interface.Retroclient;
+import com.users.College_scout.OrdersModel;
 import com.users.College_scout.Request.FoodRequest;
 
 import java.io.IOException;
 import java.util.List;
 
-import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+public class OrderRepo {
+    private MutableLiveData<OrdersModel> orderlist;
 
-public class FoodRepo {
-    private MutableLiveData<List<FoodModel>> foodlist;
-
-    public FoodRepo(MutableLiveData<List<FoodModel>> foodlist) {
-        this.foodlist = foodlist;
+    public OrderRepo(MutableLiveData<OrdersModel> orderlist) {
+        this.orderlist = orderlist;
         loaddata();
     }
 
-    public MutableLiveData<List<FoodModel>> loaddata() {
-        String email =Prefs.getString("email","");
-        FoodRequest foodRequest= new FoodRequest(email);
-        Call<List<FoodModel>> call = Retroclient.getInstance().getapi().getitems(foodRequest);
+    public MutableLiveData<OrdersModel> loaddata() {
 
-
-        call.enqueue(new Callback<List<FoodModel>>() {
+        Call<OrdersModel> call = Retroclient.getInstance().getapi().getorderstatus("5faa7a18e269ff840b8a9cb8");
+        call.enqueue(new Callback<OrdersModel>() {
             @Override
-            public void onResponse(Call<List<FoodModel>> call, Response<List<FoodModel>> response) {
+            public void onResponse(Call<OrdersModel> call, Response<OrdersModel> response) {
                 //finally we are setting the list to our MutableLiveData
                 if (response.isSuccessful()) {
-                    foodlist.setValue(response.body());
-                   // Log.d("rlog",response.body().toString());
+                    orderlist.setValue(response.body());
+                    //Log.d("rlog",response.body().toString());
+                    String s= response.body().toString();
+
                 }
 
                 else{
@@ -52,10 +49,11 @@ public class FoodRepo {
                 }
             }
             @Override
-            public void onFailure(Call<List<FoodModel>> call, Throwable t) {
+            public void onFailure(Call<OrdersModel> call, Throwable t) {
                 Log.d("failure",t.getMessage());
             }
         });
-        return  foodlist;
+        return orderlist;
     }
 }
+
