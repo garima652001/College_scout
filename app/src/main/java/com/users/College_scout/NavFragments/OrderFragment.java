@@ -17,42 +17,38 @@ import com.google.android.material.tabs.TabLayout;
 import com.users.College_scout.Adapter.TabAdapter;
 import com.users.College_scout.R;
 
-
 public class OrderFragment extends Fragment {
 
     TabLayout tabLayout;
-    TabItem tabItem1,tabItem2;
+    TabItem tabItem1, tabItem2;
     ViewPager viewPager;
     TabAdapter tabAdapter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_order, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        tabLayout=view.findViewById(R.id.tablayout);
-        tabItem1=view.findViewById(R.id.tab1);
-        tabItem2=view.findViewById(R.id.tab2);
-        viewPager=view.findViewById(R.id.viewpager);
-        tabAdapter=new TabAdapter(getActivity().getSupportFragmentManager(),tabLayout.getTabCount());
+        View view = inflater.inflate(R.layout.fragment_order, container, false);
+        tabLayout = view.findViewById(R.id.tablayout);
+        tabItem1 = view.findViewById(R.id.tab1);
+        tabItem2 = view.findViewById(R.id.tab2);
+        viewPager = view.findViewById(R.id.viewpager);
+        tabAdapter = new TabAdapter(getActivity().getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(tabAdapter);
+
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
 
-            if(tab.getPosition()==0 || tab.getPosition()==1)
-            tabAdapter.notifyDataSetChanged();
+                if (tab.getPosition() == 0 || tab.getPosition() == 1)
+                    tabAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -70,5 +66,8 @@ public class OrderFragment extends Fragment {
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
+
+        return view;
     }
+
 }

@@ -120,16 +120,16 @@
             app:layout_constraintTop_toBottomOf="@+id/otp_view" />
 
         <TextView
-            android:id="@+id/tv_resend"
+            android:id="@+id/timer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="92dp"
             android:fontFamily="@font/gilroy_bold"
-            android:text="Resend OTP"
+            android:text="Time left : 00:60"
             android:textColor="#000"
             android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_verify" />
 
@@ -141,7 +141,7 @@
             android:layout_marginTop="8dp"
             android:background="#B5B2B2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_resend" />
+            app:layout_constraintTop_toBottomOf="@+id/timer" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,7 @@ public class Order {
         private Boolean isaccepted;
         private String orderStatus;
         private Boolean isPaid;
-        private String id;
+        private String _id;
         private String shopId;
         private String consumerId;
         private String itemName;
@@ -39,15 +39,23 @@ public class Order {
             this.isPaid = isPaid;
         }
 
-        public String getId() {
-            return id;
-        }
+    public Boolean getPaid() {
+        return isPaid;
+    }
 
-        public void setId(String id) {
-            this.id = id;
-        }
+    public void setPaid(Boolean paid) {
+        isPaid = paid;
+    }
 
-        public String getShopId() {
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
+
+    public String getShopId() {
             return shopId;
         }
 

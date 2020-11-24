@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.users.College_scout.ViewModel.FoodViewModel;
@@ -28,6 +29,7 @@ import java.util.List;
 public class AddFragment extends Fragment {
 
     ImageView add;
+    LinearLayout isempty;
     FoodViewModel foodViewModel;
     Context context;
     RecyclerView recyclerView;
@@ -50,6 +52,7 @@ public class AddFragment extends Fragment {
         View view= inflater.inflate(R.layout.fragment_add, container, false);
         add=view.findViewById(R.id.img_add);
         recyclerView=view.findViewById(R.id.recycler_view);
+        isempty= view.findViewById(R.id.empytycart);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
@@ -72,9 +75,13 @@ public class AddFragment extends Fragment {
         foodViewModel.getFeed(context).observe(getViewLifecycleOwner(), new Observer<List<FoodModel>>() {
             @Override
             public void onChanged(@Nullable List<FoodModel> foodList) {
-                itemadapter=new FoodAdapter(foodList,context);
-                recyclerView.setAdapter(itemadapter);
-               // Toast.makeText(context, "Food is: "+foodList.get(5).getPriceArray().get(0).getPrice(), Toast.LENGTH_SHORT).show();
+                if (foodList.size() == 0) {
+                      isempty.setVisibility(View.VISIBLE);
+                } else {
+                    itemadapter = new FoodAdapter(foodList, context);
+                    recyclerView.setAdapter(itemadapter);
+                    // Toast.makeText(context, "Food is: "+foodList.get(5).getPriceArray().get(0).getPrice(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

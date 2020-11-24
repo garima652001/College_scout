@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 import es.dmoral.toasty.Toasty;
+import ir.samanjafari.easycountdowntimer.CountDownInterface;
+import ir.samanjafari.easycountdowntimer.EasyCountDownTextview;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,7 +42,7 @@ public class OtpFragment extends Fragment {
 
     Button btn_verify;
     EditText etotp;
-    TextView resend;
+    TextView timer;
     private OtpView otpView;
 
     @Override
@@ -60,15 +63,15 @@ public class OtpFragment extends Fragment {
         View view =inflater.inflate(R.layout.fragment_otp, container, false);
         btn_verify= view.findViewById(R.id.btn_verify);
         etotp= view.findViewById(R.id.et_otp);
-        resend=view.findViewById(R.id.tv_resend);
+        timer=view.findViewById(R.id.timer);
         otpView = view.findViewById(R.id.otp_view);
-
         otpView.setOtpCompletionListener(new OnOtpCompletionListener() {
             @Override public void onOtpCompleted(String otp) {
                 // do Stuff
                 btn_verify.setClickable(true);
             }
         });
+        timer();
 
         btn_verify.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +80,7 @@ public class OtpFragment extends Fragment {
             }
         });
 
-        resend.setOnClickListener(new View.OnClickListener() {
+        timer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 resendotp();
@@ -85,6 +88,24 @@ public class OtpFragment extends Fragment {
         });
         return view;
     }
+
+    private void timer() {
+     
+            new CountDownTimer(10000, 1000) {
+
+                public void onTick(long millisUntilFinished) {
+                    timer.setText("Time remaining: 00:" + millisUntilFinished / 1000);
+                    timer.setClickable(false);
+                }
+
+                public void onFinish() {
+                    timer.setText("Resend OTP");
+                    timer.setClickable(true);
+                }
+
+            }.start();
+        }
+    
 
     private void resendotp() {
         String email = Prefs.getString("email","");

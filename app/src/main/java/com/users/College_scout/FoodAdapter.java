@@ -86,7 +86,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
           sizes=itemView.findViewById(R.id.av_size);
           category=itemView.findViewById(R.id.card_category);
           price=itemView.findViewById(R.id.cardprice);
-
         }
     }
 }

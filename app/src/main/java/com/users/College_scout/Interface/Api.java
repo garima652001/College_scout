@@ -5,7 +5,9 @@ import com.users.College_scout.FoodModel;
 import com.users.College_scout.OrdersModel;
 import com.users.College_scout.Request.DetailRequest;
 import com.users.College_scout.Request.FoodRequest;
+import com.users.College_scout.Request.GettopRequest;
 import com.users.College_scout.Request.LoginRequest;
+import com.users.College_scout.Request.OrderRequest;
 import com.users.College_scout.Request.Otpverify;
 import com.users.College_scout.Request.RefreshRequest;
 import com.users.College_scout.Request.Resendotp;
@@ -14,6 +16,7 @@ import com.users.College_scout.Request.ResetpassRequest;
 import com.users.College_scout.Request.Signup;
 import com.users.College_scout.Respose.LoginResponse;
 import com.users.College_scout.Respose.OtpResponse;
+import com.users.College_scout.TodaysModel;
 
 import java.util.List;
 
@@ -68,8 +71,14 @@ public interface Api {
     @POST("/shop/getItem")
     Call<List<FoodModel>> getitems(@Body FoodRequest foodRequest);
 
-    @FormUrlEncoded
+    /*@FormUrlEncoded
     @POST("/shop/shopOrder")
-    Call<OrdersModel> getorderstatus(@Field("shopId") String shopId);
+    Call<OrdersModel> getorderstatus(@Field("shopId") String shopId);*/
+
+    @POST("/shop/shopOrder")
+    Call<OrdersModel> getorderstatus(@Body OrderRequest orderRequest);
+
+    @POST("/todaysTop")
+    Call<List<TodaysModel>> gettop(@Body GettopRequest gettop);
 
 }

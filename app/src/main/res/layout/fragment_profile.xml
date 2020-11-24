@@ -65,6 +65,13 @@
                 android:src="@drawable/shopbg"
                 android:scaleType="centerCrop"
             />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_gradient"
+                android:layout_gravity="bottom"
+                android:scaleType="center"
+                />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

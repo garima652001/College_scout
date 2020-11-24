@@ -27,7 +27,6 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
-
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.firebase:firebase-storage:19.2.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
@@ -48,4 +47,5 @@ dependencies {
     implementation 'com.github.MdFarhanRaja:SearchableSpinner:2.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation 'ir.samanjafari.easycountdowntimer:easycountdowntimer:2.5.0'
 }

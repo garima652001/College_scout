@@ -29,7 +29,6 @@
         android:layout_height="wrap_content"
         app:tabSelectedTextColor="@color/colorPrimaryDark"
         android:layout_marginTop="15dp"
-
         >
 
         <com.google.android.material.tabs.TabItem

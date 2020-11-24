@@ -9,12 +9,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.users.College_scout.Adapter.OrderAdapter;
 import com.users.College_scout.FoodAdapter;
 import com.users.College_scout.FoodModel;
 import com.users.College_scout.OrdersModel;
@@ -28,6 +31,8 @@ import java.util.List;
 public class PendingFragment extends Fragment {
     Context context;
     OrderViewModel orderViewModel;
+    OrderAdapter orderAdapter;
+    RecyclerView recyclerView;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +49,10 @@ public class PendingFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_pending, container, false);
+        recyclerView=view.findViewById(R.id.recycler_view1);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+
         loaddata();
         return view;
     }
@@ -54,7 +63,9 @@ public class PendingFragment extends Fragment {
         orderViewModel.getFeed(context).observe(getViewLifecycleOwner(), new Observer<OrdersModel>() {
             @Override
             public void onChanged(@Nullable OrdersModel orderList) {
-                Toast.makeText(context, "Food is: "+orderList.getOrders(), Toast.LENGTH_LONG).show();
+                orderAdapter = new OrderAdapter(orderList.getOrders(),context);
+                recyclerView.setAdapter(orderAdapter);
+               // Toast.makeText(context, "Food is: "+orderList.getOrders().get(0).getItemName(), Toast.LENGTH_LONG).show();
             }
         });
 
