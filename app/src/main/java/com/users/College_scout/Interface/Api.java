@@ -14,6 +14,7 @@ import com.users.College_scout.Request.Resendotp;
 import com.users.College_scout.Request.ResetRequest;
 import com.users.College_scout.Request.ResetpassRequest;
 import com.users.College_scout.Request.Signup;
+import com.users.College_scout.Request.StatusRequest;
 import com.users.College_scout.Respose.LoginResponse;
 import com.users.College_scout.Respose.OtpResponse;
 import com.users.College_scout.TodaysModel;
@@ -77,6 +78,9 @@ public interface Api {
 
     @POST("/shop/shopOrder")
     Call<OrdersModel> getorderstatus(@Body OrderRequest orderRequest);
+
+    @POST("/orderStatus")
+    Call<ResponseBody> changestatus(@Body StatusRequest statusRequest);
 
     @POST("/todaysTop")
     Call<List<TodaysModel>> gettop(@Body GettopRequest gettop);

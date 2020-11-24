@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_marginHorizontal="30dp"
+    android:layout_marginHorizontal="20dp"
     android:layout_height="wrap_content"
+    android:paddingBottom="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
@@ -34,7 +35,6 @@
             android:layout_height="wrap_content"
             android:text="Pending"
             android:checked="true"
-            android:onClick="updatestatus"
             android:textSize="17sp"
             android:fontFamily="@font/gilroy_medium"
             android:layout_marginBottom="10dp"/>
@@ -43,7 +43,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Completed"
-            android:onClick="updatestatus"
             android:textSize="17sp"
             android:fontFamily="@font/gilroy_medium"
             android:layout_marginBottom="10dp"/>
@@ -52,7 +51,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Not available"
-            android:onClick="updatestatus"
             android:textSize="17sp"
             android:fontFamily="@font/gilroy_medium"/>
     </RadioGroup>

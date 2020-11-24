@@ -30,9 +30,8 @@ public class PrefsApplication extends Application {
     }
 
     public void refreshToken(String token){
-        String retoken = Prefs.getString("refreshToken","");
-        RefreshRequest refreshRequest= new RefreshRequest(retoken);
-
+       // String retoken = Prefs.getString("refreshToken","");
+        RefreshRequest refreshRequest= new RefreshRequest(token);
         Call<ResponseBody> call= Retroclient
                 .getInstance()
                 .getapi()

@@ -17,16 +17,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.annimon.stream.Collectors;
+import com.annimon.stream.Stream;
+import com.annimon.stream.function.Predicate;
 import com.users.College_scout.Adapter.OrderAdapter;
 import com.users.College_scout.FoodAdapter;
 import com.users.College_scout.FoodModel;
+import com.users.College_scout.Order;
 import com.users.College_scout.OrdersModel;
 import com.users.College_scout.R;
 import com.users.College_scout.ViewModel.FoodViewModel;
 import com.users.College_scout.ViewModel.OrderViewModel;
 
 import java.util.List;
-
 
 public class PendingFragment extends Fragment {
     Context context;
@@ -63,7 +66,15 @@ public class PendingFragment extends Fragment {
         orderViewModel.getFeed(context).observe(getViewLifecycleOwner(), new Observer<OrdersModel>() {
             @Override
             public void onChanged(@Nullable OrdersModel orderList) {
-                orderAdapter = new OrderAdapter(orderList.getOrders(),context);
+
+                List<Order> filteredList = Stream.of(orderList.getOrders()).filter(new Predicate<Order>() {
+                    @Override
+                    public boolean test(Order item) {
+                        return item.getOrderStatus().equalsIgnoreCase("pending");
+                    }
+                }).collect(Collectors.toList());
+
+                orderAdapter = new OrderAdapter(filteredList,context);
                 recyclerView.setAdapter(orderAdapter);
                // Toast.makeText(context, "Food is: "+orderList.getOrders().get(0).getItemName(), Toast.LENGTH_LONG).show();
             }
