@@ -1,13 +1,13 @@
 package com.users.College_scout.Request;
 
 public class DetailRequest {
-    String email,name,ShopName,college;
+    String email,name,Shopname,college;
     boolean inCollege;
 
-    public DetailRequest(String email, String name, String ShopName, String college, boolean inCollege) {
+    public DetailRequest(String email, String name, String Shopname, String college, boolean inCollege) {
         this.email = email;
         this.name = name;
-        this.ShopName = ShopName;
+        this.Shopname = Shopname;
         this.college = college;
         this.inCollege = inCollege;
     }
@@ -29,11 +29,11 @@ public class DetailRequest {
     }
 
     public String getShopName() {
-        return ShopName;
+        return Shopname;
     }
 
-    public void setShopName(String ShopName) {
-        this.ShopName = ShopName;
+    public void setShopName(String Shopname) {
+        this.Shopname = Shopname;
     }
 
     public String getCollege() {

@@ -142,7 +142,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                         holder.status.setImageResource(R.drawable.ic_completed);
                     }
                     dialog.dismiss();
-
                 }
                 else{
                     Toast.makeText(context, "Failed to update", Toast.LENGTH_SHORT).show();

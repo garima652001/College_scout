@@ -13,7 +13,7 @@ public class Order {
         private String createdAt;
         private String updatedAt;
         private Integer v;
-        private Integer rating;
+        private float rating;
 
         public Boolean getIsaccepted() {
             return isaccepted;
@@ -118,11 +118,12 @@ public class Order {
         public void setV(Integer v) {
             this.v = v;
         }
-        public Integer getRating() {
-            return rating;
-        }
 
-        public void setRating(Integer rating) {
-            this.rating = rating;
-        }
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
 }

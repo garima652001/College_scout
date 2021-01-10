@@ -245,10 +245,10 @@ public class AdditemActivity extends AppCompatActivity {
         data.addProperty("price", price);
         data.addProperty("size", size);
         jsonObject.add("price",data);
-       /* JsonObject data1=new JsonObject();
-        data1.addProperty("price", price);
-        data1.addProperty("size", size);
-        jsonObject.add("price",data1);*/
+        JsonObject data1=new JsonObject();
+        data1.addProperty("price", "150");
+        data1.addProperty("size", "Full");
+        jsonObject.add("price",data1);
 
         Call<ResponseBody> call= Retroclient
                 .getInstance()
@@ -262,7 +262,6 @@ public class AdditemActivity extends AppCompatActivity {
                     Toasty.success(AdditemActivity.this,"Item added successfully",Toast.LENGTH_LONG,true).show();
                 }
                 else if(response.code()==401){
-                    Toasty.normal(AdditemActivity.this,"Expired").show();
                     String token1= Prefs.getString("refresh_token","");
                     PrefsApplication prefsApplication= new PrefsApplication();
                     prefsApplication.refreshToken(token1);
@@ -324,7 +323,7 @@ public class AdditemActivity extends AppCompatActivity {
     private void dialog_rates() {
         dialog2.setContentView(R.layout.platesize_dialog);
         dialog2.getWindow().setBackgroundDrawable(ContextCompat.getDrawable(AdditemActivity.this,R.drawable.bg2));
-        dialog2.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog2.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog2.setCancelable(false);
 
         final EditText et_price;
@@ -406,7 +405,7 @@ public class AdditemActivity extends AppCompatActivity {
     private void dialog_type() {
         dialog.setContentView(R.layout.type_dialog);
         dialog.getWindow().setBackgroundDrawable(ContextCompat.getDrawable(AdditemActivity.this,R.drawable.bg2));
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.setCancelable(false);
 
         final TextView et_veg,et_nonveg;

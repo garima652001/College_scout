@@ -37,10 +37,10 @@ public class OrderRepo {
                     orderlist.setValue(response.body());
                     Log.d("rlog",response.body().toString());
                     String s= response.body().toString();
-
                 }
 
-                else{
+                else
+                    {
                     try {
                         Log.d("rlogerror",response.errorBody().string());
                     } catch (IOException e) {

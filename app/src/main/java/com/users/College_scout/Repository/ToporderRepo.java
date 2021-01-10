@@ -26,7 +26,7 @@ public class ToporderRepo {
         loaddata();
     }
     public MutableLiveData<List<TodaysModel>> loaddata() {
-        GettopRequest gettopRequest= new GettopRequest("17/11/20");
+        GettopRequest gettopRequest= new GettopRequest("31/12/20");
         Call<List<TodaysModel>> call = Retroclient.getInstance().getapi().gettop(gettopRequest);
 
 
@@ -36,7 +36,7 @@ public class ToporderRepo {
                 //finally we are setting the list to our MutableLiveData
                 if (response.isSuccessful()) {
                     toplist.setValue(response.body());
-                    // Log.d("rlog",response.body().toString());
+                    Log.d("rlog",response.body().toString());
                 }
 
                 else{

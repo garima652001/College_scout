@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingBottom="16dp"
-    android:paddingHorizontal="25dp">
+    android:layout_marginHorizontal="25dp">
     <TextView
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
@@ -24,7 +24,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="16dp"
         android:text="Add plate"
-        android:paddingHorizontal="35dp"
+        android:paddingHorizontal="15dp"
         android:fontFamily="@font/gilroy_bold"
         android:textAllCaps="false"
         android:textColor="#fff"
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="Cancel"
-        android:paddingHorizontal="45dp"
+        android:paddingHorizontal="20dp"
         android:fontFamily="@font/gilroy_bold"
         android:textAllCaps="false"
         android:textColor="#000"

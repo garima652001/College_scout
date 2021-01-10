@@ -13,7 +13,7 @@ public class TodaysModel {
     private Integer total;
     private Integer itemSold;
     private List<String> name = null;
-    private List<Integer> rating = null;
+    private List<Float> rating = null;
 
     public String getId() {
         return id;
@@ -47,13 +47,12 @@ public class TodaysModel {
         this.name = name;
     }
 
-    public List<Integer> getRating() {
+    public List<Float> getRating() {
         return rating;
     }
 
-    public void setRating(List<Integer> rating) {
+    public void setRating(List<Float> rating) {
         this.rating = rating;
     }
-
 }
 
